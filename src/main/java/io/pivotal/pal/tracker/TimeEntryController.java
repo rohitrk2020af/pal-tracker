@@ -48,6 +48,7 @@ public class TimeEntryController {
     @PostMapping
     public ResponseEntity<TimeEntry> create(@RequestBody TimeEntry timeEntry) {
         TimeEntry createdTimeEntry = timeEntriesRepo.create(timeEntry);
+        actionCounter.increment();
 
         return new ResponseEntity<>(createdTimeEntry, HttpStatus.CREATED);
     }
@@ -64,6 +65,7 @@ public class TimeEntryController {
     }
     @GetMapping
     public ResponseEntity<List<TimeEntry>> list() {
+        actionCounter.increment();
         return new ResponseEntity<>(timeEntriesRepo.list(), HttpStatus.OK);
     }
 }
